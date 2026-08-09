@@ -1,5 +1,5 @@
 // Configuration
-const WHATSAPP_NUMBER = "+1234567890"; // To be updated by user
+const WHATSAPP_NUMBER = "9043041043"; // To be updated by user
 
 // Cart State
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
