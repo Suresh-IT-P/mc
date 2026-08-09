@@ -1,0 +1,6 @@
+.git
+.git/
+.gitignore
+*.py
+image_mapping.json
+node_modules/
