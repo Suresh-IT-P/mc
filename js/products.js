@@ -184,14 +184,6 @@ const products = [
     "description": "Premium Sc Project Exhaust Can Black for your motorcycle."
   },
   {
-    "id": 24,
-    "name": "Sc Project Exhaust Can",
-    "category": "Exhaust",
-    "price": 2,
-    "image": "images/image/New folder/SC Project Carbon Fiber Finish Universal Exhaust Silencer Can.png",
-    "description": "Premium Sc Project Exhaust Can for your motorcycle."
-  },
-  {
     "id": 25,
     "name": "Riding Bag The Doctor",
     "category": "Accessories",
