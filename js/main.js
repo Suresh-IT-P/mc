@@ -8,8 +8,18 @@ function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
+// Rate Limiter logic for buttons
+let lastActionTime = 0;
+const ACTION_THROTTLE_MS = 1000; // 1 second between clicks
 
 function addToCart(productId, quantity = 1) {
+  const now = Date.now();
+  if (now - lastActionTime < ACTION_THROTTLE_MS) {
+    console.warn("Rate limited: Please wait before adding to cart again.");
+    return;
+  }
+  lastActionTime = now;
+
   const product = products.find(p => p.id === productId);
   if (!product) return;
   
@@ -50,7 +60,14 @@ function updateCartCount() {
 
 // WhatsApp Checkout
 function checkoutViaWhatsApp(singleProduct = null, singleQuantity = 1) {
-  let message = "Hello Moto MC Choice! I would like to place an order:\n\n";
+  const now = Date.now();
+  if (now - lastActionTime < ACTION_THROTTLE_MS) {
+    alert("Please wait a moment before sending another request.");
+    return;
+  }
+  lastActionTime = now;
+
+  let message = "Hello MotoChoice! I would like to place an order:\n\n";
   let total = 0;
 
   if (singleProduct) {
@@ -86,18 +103,71 @@ function executeSearch() {
   }
 }
 
+function handleSearchInput(e) {
+  const query = e.target.value.toLowerCase().trim();
+  const suggestionsBox = document.getElementById('search-suggestions');
+  
+  if (!suggestionsBox) return;
+
+  if (query.length < 2) {
+    suggestionsBox.classList.remove('active');
+    return;
+  }
+
+  const filtered = (typeof products !== 'undefined' ? products : []).filter(p => 
+    p.name.toLowerCase().includes(query) || 
+    p.category.toLowerCase().includes(query)
+  ).slice(0, 5);
+
+  if (filtered.length > 0) {
+    suggestionsBox.innerHTML = filtered.map(p => `
+      <div class="suggestion-item" onclick="window.location.href='product.html?id=${p.id}'">
+        <img src="${p.image}" alt="${p.name}" class="suggestion-img">
+        <div class="suggestion-info">
+          <span class="suggestion-name">${p.name}</span>
+          <span class="suggestion-price">${formatPrice(p.price)}</span>
+        </div>
+      </div>
+    `).join('');
+    suggestionsBox.classList.add('active');
+  } else {
+    suggestionsBox.innerHTML = '<div class="suggestion-item"><span class="suggestion-name">No results found</span></div>';
+    suggestionsBox.classList.add('active');
+  }
+}
+
+// Close suggestions on click outside
+document.addEventListener('click', (e) => {
+  const searchContainer = document.querySelector('.search-container');
+  const suggestionsBox = document.getElementById('search-suggestions');
+  if (searchContainer && suggestionsBox && !searchContainer.contains(e.target)) {
+    suggestionsBox.classList.remove('active');
+  }
+});
+
 // Initial setup on DOM Load
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   
-  // Attach enter key to search
+  // Attach enter key and input event to search
   const searchInput = document.getElementById('header-search');
+  
+  // Basic debounce function to prevent rapid-fire search execution
+  function debounce(func, timeout = 300){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+
   if (searchInput) {
     searchInput.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         executeSearch();
       }
     });
+    searchInput.addEventListener('input', debounce(handleSearchInput, 300));
   }
 
   // Hero Carousel Logic
@@ -144,6 +214,30 @@ function scrollRow(id, direction) {
     } else {
       container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
-  }
+}
 }
 
+// Security Features
+document.addEventListener('DOMContentLoaded', () => {
+  // Disable right-click
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Disable common developer tools keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+    if (
+      e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+      (e.ctrlKey && ['U', 'u'].includes(e.key))
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  // Disable dragging images
+  document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') {
+      e.preventDefault();
+    }
+  });
+});

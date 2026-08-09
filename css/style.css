@@ -21,12 +21,19 @@
   padding: 0;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--text-dark);
   line-height: 1.6;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -176,6 +183,67 @@ header {
   transform: scale(1.1);
 }
 
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.search-suggestions.active {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: var(--light-grey);
+}
+
+.suggestion-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.suggestion-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestion-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-grey);
+}
+
+.suggestion-price {
+  font-size: 13px;
+  color: var(--primary-red);
+}
+
 nav.desktop-nav {
   overflow-x: auto;
 }
@@ -184,6 +252,7 @@ nav.desktop-nav ul {
   display: flex;
   gap: 30px;
   align-items: center;
+  justify-content: center;
   height: 60px;
   white-space: nowrap;
 }
@@ -452,10 +521,189 @@ nav.desktop-nav a:hover, nav.desktop-nav a.active {
   transform: scale(1.1);
 }
 
+/* Shop Layout & Sidebar Filters */
+.shop-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.shop-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.shop-main {
+  flex-grow: 1;
+}
+
+.filter-group {
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--dark-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+
+.checkbox-label:hover {
+  color: var(--primary-red);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-red);
+  cursor: pointer;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-inputs input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.price-inputs input:focus {
+  border-color: var(--primary-red);
+}
+
+.price-inputs span {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+#mobile-filter-btn {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-close {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .shop-layout {
+    flex-direction: column;
+  }
+  
+  #mobile-filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: var(--white);
+    font-weight: 700;
+  }
+  
+  .shop-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100vh;
+    max-height: 100vh;
+    z-index: 1001;
+    transition: left 0.3s ease;
+    border-radius: 0;
+    overflow-y: auto;
+    padding-top: 60px; /* space for close btn */
+  }
+  
+  .shop-sidebar.active {
+    left: 0;
+  }
+  
+  .sidebar-close {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    background: var(--light-grey);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-grey);
+  }
+  
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: block;
+  }
+  
+  .sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 /* Grid Layouts */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 30px;
   margin-bottom: 50px;
 }
@@ -606,12 +854,12 @@ footer {
   font-size: 14px;
 }
 
-/* Floating WhatsApp Button */
-.floating-whatsapp {
+/* Floating Contact Button */
+.floating-contact {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color: #25D366;
+  background-color: var(--primary-red);
   color: white;
   width: 60px;
   height: 60px;
@@ -619,13 +867,13 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 15px rgba(230, 43, 43, 0.4);
   z-index: 1000;
   transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-.floating-whatsapp:hover {
+.floating-contact:hover {
   transform: scale(1.1) rotate(-10deg);
 }
 
@@ -916,5 +1164,20 @@ footer {
     right: 20px;
     width: 50px;
     height: 50px;
+  }
+}
+
+/* Visit Us Section */
+.visit-us-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .visit-us-grid {
+    grid-template-columns: 1fr;
   }
 }

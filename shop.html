@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop | Moto MC Choice</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <title>Shop Motorcycle Gear in Tamil Nadu | MotoChoice</title>
+  <meta name="description" content="Explore MotoChoice's wide range of motorcycle accessories and riding gear in Tamil Nadu. High-quality helmets, luggage, and performance parts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <meta name="geo.region" content="IN-TN">
+  <meta name="geo.placename" content="Tiruchengode, Tamil Nadu">
 </head>
 <body>
-  
   <div class="announcement-bar">
     <div class="announcement-content">
       <span>🚀 SPECIAL OFFER: GET FREE SHIPPING ON ORDERS ABOVE ₹3,000</span>
@@ -23,22 +26,23 @@
   <header>
     <div class="header-top container">
       <a href="index.html" class="logo-link">
-        <img src="images/logo.png" alt="Moto MC Choice Logo" class="logo-img">
+        <img src="images/logo.png" alt="MotoChoice Logo" class="logo-img">
       </a>
       
       <div class="search-container">
-        <input type="text" id="header-search" class="search-input" placeholder="Search helmets, gear...">
+        <input type="text" id="header-search" class="search-input" placeholder="Search helmets, gear..." autocomplete="off">
         <button class="search-btn" onclick="executeSearch()" aria-label="Search">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
+        <div id="search-suggestions" class="search-suggestions"></div>
       </div>
 
       <div class="header-icons">
         <a onclick="checkoutViaWhatsApp()" style="color:var(--dark-grey); cursor: pointer;" title="Contact Us">
-           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg>
         </a>
         <a href="cart.html" class="cart-icon" aria-label="View Cart">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -56,9 +60,9 @@
         <nav class="desktop-nav">
           <ul>
             <li><a href="shop.html?category=Helmets">Helmets & Accessories</a></li>
-            <li><a href="shop.html?category=Riding%20Gear">Riding Gears</a></li>
             <li><a href="shop.html?category=Accessories">Motorcycle Accessories</a></li>
-            <li><a href="shop.html?category=Luggage">Luggage & Touring</a></li>
+            <li><a href="shop.html?category=Lights">Lights</a></li>
+            <li><a href="shop.html?category=Protection">Protection</a></li>
             <li><a href="shop.html" style="color: var(--primary-red);">Sale</a></li>
           </ul>
         </nav>
@@ -75,19 +79,66 @@
 
     <section class="page-section">
       <div class="container">
-        <div class="section-title">
-          <h2 id="shop-title">All Products</h2>
-        </div>
-        
-        <div style="margin-bottom: 30px; display:flex; gap: 10px; flex-wrap: wrap;">
-          <a href="shop.html" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">All</a>
-          <a href="shop.html?category=Helmets" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">Helmets</a>
-          <a href="shop.html?category=Riding Gear" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">Riding Gear</a>
-          <a href="shop.html?category=Accessories" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">Accessories</a>
-        </div>
 
-        <div class="product-grid" id="shop-products">
-          <!-- Populated by JS -->
+        <div class="shop-layout">
+          <!-- Mobile Filter Toggle Button -->
+          <button id="mobile-filter-btn" class="btn btn-outline" onclick="toggleMobileFilters()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            Filter Products
+          </button>
+          
+          <div class="sidebar-overlay" onclick="toggleMobileFilters()"></div>
+
+          <aside class="shop-sidebar">
+            <div class="sidebar-close" onclick="toggleMobileFilters()">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            
+            <div class="filter-group">
+              <h3 class="filter-title">Categories</h3>
+              <div class="filter-options">
+                <label class="checkbox-label">
+                  <input type="checkbox" value="Helmets" class="category-filter"> Helmets
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="Accessories" class="category-filter"> Accessories
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="Lights" class="category-filter"> Lights
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="Exhaust" class="category-filter"> Exhausts
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" value="Protection" class="category-filter"> Protection
+                </label>
+              </div>
+            </div>
+            
+            <div class="filter-group">
+              <h3 class="filter-title">Price Range (₹)</h3>
+              <div class="price-inputs">
+                <input type="number" id="min-price" placeholder="Min" min="0">
+                <span>-</span>
+                <input type="number" id="max-price" placeholder="Max" min="0">
+              </div>
+            </div>
+            
+            <button onclick="applySidebarFilters()" class="btn btn-primary btn-block" style="margin-top: 10px;">Apply Filters</button>
+            <button onclick="clearSidebarFilters()" class="btn btn-outline btn-block" style="margin-top: 10px; border: none; text-decoration: underline;">Clear All</button>
+          </aside>
+          
+          <div class="shop-main">
+            <div class="shop-header" style="margin-bottom: 30px; text-align: left;">
+              <h2 id="shop-title" style="font-size: 32px; text-transform: uppercase; color: var(--dark-grey); margin-bottom: 5px; font-family: var(--font-heading); display: inline-block; position: relative;">All Products</h2>
+              <span id="product-count" style="font-size: 20px; color: #777; margin-left: 10px; font-weight: 500;"></span>
+              <div style="width: 60px; height: 4px; background-color: var(--primary-red); margin-top: 5px;"></div>
+            </div>
+            
+            <div class="product-grid" id="shop-products">
+              <!-- Populated by JS -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -98,7 +149,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <a href="index.html" class="logo-text" style="color: white; margin-bottom: 20px;">
-            MOTO <span class="red">MC</span> CHOICE
+            MOTO<span class="red">CHOICE</span>
           </a>
         </div>
         <div class="footer-col">
@@ -109,7 +160,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; <script>document.write(new Date().getFullYear())</script> Moto MC Choice. All rights reserved.
+        &copy; <script>document.write(new Date().getFullYear())</script> MotoChoice. All rights reserved.
       </div>
     </div>
   </footer>
@@ -121,47 +172,135 @@
       const urlParams = new URLSearchParams(window.location.search);
       const category = urlParams.get('category');
       const searchQuery = urlParams.get('search');
+      const bikeQuery = urlParams.get('bike');
       
       const grid = document.getElementById('shop-products');
       const title = document.getElementById('shop-title');
       const breadcrumb = document.getElementById('breadcrumb-current');
       
-      let filteredProducts = products;
+      const renderProducts = (productsToRender) => {
+        const countSpan = document.getElementById('product-count');
+        if (countSpan) {
+          countSpan.innerText = `(${productsToRender.length})`;
+        }
+        if (productsToRender.length === 0) {
+          grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; font-size: 18px; color: #777; padding: 40px 0;">No products found for this bike.</p>`;
+        } else {
+          grid.innerHTML = productsToRender.map(p => `
+            <div class="product-card animate-fade-up">
+              <a href="product.html?id=${p.id}" class="product-image">
+                <img src="${p.image}" alt="${p.name}" onerror="this.closest('.product-card').style.display='none'">
+              </a>
+              <div class="product-info">
+                <div class="product-category">${p.category}</div>
+                <h3 class="product-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
+                <div class="product-price">${formatPrice(p.price)}</div>
+                <div class="product-actions">
+                  <button onclick="addToCart(${p.id})" class="btn btn-outline" style="flex:1;">Add to Cart</button>
+                  <button onclick="checkoutViaWhatsApp(products.find(x => x.id === ${p.id}), 1)" class="btn btn-primary" style="flex:1;">Buy Now</button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      };
+
+      window.applySidebarFilters = () => {
+        const categoryCheckboxes = document.querySelectorAll('.category-filter:checked');
+        const selectedCategories = Array.from(categoryCheckboxes).map(cb => cb.value);
+        
+        const minPriceVal = document.getElementById('min-price').value;
+        const maxPriceVal = document.getElementById('max-price').value;
+        
+        const minPrice = minPriceVal ? parseFloat(minPriceVal) : 0;
+        const maxPrice = maxPriceVal ? parseFloat(maxPriceVal) : Infinity;
+        
+        let filteredProducts = products;
+        
+        const currentUrlParams = new URLSearchParams(window.location.search);
+        const currentSearchQuery = currentUrlParams.get('search');
+        const currentBike = currentUrlParams.get('bike');
+        
+        // Bike filter: search by bike brand in name and description
+        if (currentBike) {
+          const lowerBike = currentBike.toLowerCase();
+          filteredProducts = filteredProducts.filter(p =>
+            p.name.toLowerCase().includes(lowerBike) ||
+            (p.description && p.description.toLowerCase().includes(lowerBike))
+          );
+        }
+        
+        if (currentSearchQuery) {
+          const lowerQuery = currentSearchQuery.toLowerCase();
+          filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(lowerQuery) || p.description.toLowerCase().includes(lowerQuery) || p.category.toLowerCase().includes(lowerQuery));
+        }
+
+        if (selectedCategories.length > 0) {
+          // If "Helmets" is selected, also include legacy categories just in case
+          if (selectedCategories.includes('Helmets')) {
+             const legacyHelmetBrands = ['Axor', 'Vega', 'Steelbird', 'Studds', 'MT'];
+             filteredProducts = filteredProducts.filter(p => selectedCategories.includes(p.category) || legacyHelmetBrands.includes(p.category));
+          } else {
+             filteredProducts = filteredProducts.filter(p => selectedCategories.includes(p.category));
+          }
+        }
+        
+        filteredProducts = filteredProducts.filter(p => p.price >= minPrice && p.price <= maxPrice);
+        
+        renderProducts(filteredProducts);
+      };
+
+      window.clearSidebarFilters = () => {
+        document.querySelectorAll('.category-filter').forEach(cb => cb.checked = false);
+        document.getElementById('min-price').value = '';
+        document.getElementById('max-price').value = '';
+        applySidebarFilters();
+      };
       
-      if (category) {
-        filteredProducts = products.filter(p => p.category === category);
-        title.innerText = category;
-        breadcrumb.innerText = category;
+      window.toggleMobileFilters = () => {
+        document.querySelector('.shop-sidebar').classList.toggle('active');
+        document.querySelector('.sidebar-overlay').classList.toggle('active');
+      };
+      
+      // Initial Load
+      if (bikeQuery) {
+        // Bike mode: show a title and filter by bike
+        title.innerText = bikeQuery;
+        breadcrumb.innerText = bikeQuery;
+        // Add a styled badge below title
+        const countSpan = document.getElementById('product-count');
+        if (countSpan) countSpan.style.display = 'inline';
+      } else if (category) {
+        const categories = category.split(',');
+        categories.forEach(cat => {
+          const cb = document.querySelector(`.category-filter[value="${cat}"]`);
+          if (cb) cb.checked = true;
+        });
+        
+        // Legacy support
+        if(category === 'Helmets' || category === 'Axor' || category === 'Vega' || category === 'Steelbird' || category === 'Studds' || category === 'MT') {
+             const cb = document.querySelector(`.category-filter[value="Helmets"]`);
+             if (cb) cb.checked = true;
+             title.innerText = 'Helmets';
+             breadcrumb.innerText = 'Helmets';
+        } else {
+             title.innerText = categories.length === 1 ? categories[0] : 'Filtered Results';
+             breadcrumb.innerText = categories.length === 1 ? categories[0] : 'Filtered Results';
+        }
       } else if (searchQuery) {
-        const lowerQuery = searchQuery.toLowerCase();
-        filteredProducts = products.filter(p => p.name.toLowerCase().includes(lowerQuery) || p.description.toLowerCase().includes(lowerQuery) || p.category.toLowerCase().includes(lowerQuery));
         title.innerText = `Search Results for "${searchQuery}"`;
         breadcrumb.innerText = `Search: ${searchQuery}`;
       }
       
-      if (filteredProducts.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; font-size: 18px; color: #777; padding: 40px 0;">No products found.</p>`;
-      } else {
-        grid.innerHTML = filteredProducts.map(p => `
-          <div class="product-card animate-fade-up">
-            <a href="product.html?id=${p.id}" class="product-image">
-              <img src="${p.image}" alt="${p.name}">
-            </a>
-            <div class="product-info">
-              <div class="product-category">${p.category}</div>
-              <h3 class="product-title"><a href="product.html?id=${p.id}">${p.name}</a></h3>
-              <div class="product-price">${formatPrice(p.price)}</div>
-              <div class="product-actions">
-                <button onclick="addToCart(${p.id})" class="btn btn-outline" style="flex:1;">Add to Cart</button>
-                <button onclick="checkoutViaWhatsApp(products.find(x => x.id === ${p.id}), 1)" class="btn btn-primary" style="flex:1;">Buy Now</button>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
+      const minPriceParam = urlParams.get('min_price');
+      const maxPriceParam = urlParams.get('max_price');
+      if (minPriceParam) document.getElementById('min-price').value = minPriceParam;
+      if (maxPriceParam) document.getElementById('max-price').value = maxPriceParam;
+      
+      applySidebarFilters();
     });
   </script>
-  <a class="floating-whatsapp" onclick="checkoutViaWhatsApp()">
+  <a class="floating-contact" href="tel:+1234567890" aria-label="Call Us">
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
   </a>
 </body>
