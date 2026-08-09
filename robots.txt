@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://motochoice.in/sitemap.xml
+Sitemap: https://motochoice.shop/sitemap.xml
